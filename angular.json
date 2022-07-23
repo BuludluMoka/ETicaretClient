@@ -23,9 +23,25 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/fontawesome.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/slick.css",
+              "src/assets/css/slick-theme.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/themify-icons.css",
+              "src/assets/css/color6.css"
+              
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/menu.js",
+              "src/assets/js/slick.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/js/bootstrap-notify.min.js",
+              "src/assets/js/script.js",
+              "src/assets/js/modal.js"
+            ]
           },
           "configurations": {
             "production": {

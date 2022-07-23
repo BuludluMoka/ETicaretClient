@@ -1,0 +1,13 @@
+/* FONT PATH
+ * -------------------------- */
+
+@font-face {
+	font-family: 'themify';
+	src:url('#{$icon-font-path}/themify.eot?-fvbane');
+	src:url('#{$icon-font-path}/themify.eot?#iefix-fvbane') format('embedded-opentype'),
+		url('#{$icon-font-path}/themify.woff?-fvbane') format('woff'),
+		url('#{$icon-font-path}//themify.ttf?-fvbane') format('truetype'),
+		url('#{$icon-font-path}/themify.svg?-fvbane#themify') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
