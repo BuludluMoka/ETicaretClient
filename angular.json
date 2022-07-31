@@ -30,7 +30,8 @@
               "src/assets/css/slick-theme.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/themify-icons.css",
-              "src/assets/css/color6.css"
+              "src/assets/css/color6.css",
+              "node_modules/ngx-spinner/animations/ball-8bits.css"
               
             ],
             "scripts": [

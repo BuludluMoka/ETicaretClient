@@ -6,6 +6,7 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicModule } from './public/public.module';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { PublicModule } from './public/public.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, AdminModule, PublicModule, 
+    BrowserAnimationsModule, AdminModule, PublicModule, NgxSpinnerModule
     
   ],
   providers: [],
