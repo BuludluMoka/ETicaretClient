@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicModule } from './public/public.module';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,17 @@ import { NgxSpinnerModule } from "ngx-spinner";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, AdminModule, PublicModule, NgxSpinnerModule
-    
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    AdminModule,
+    PublicModule,
+    NgxSpinnerModule
+
   ],
-  providers: [],
+  providers: [
+    { provide: "baseUrl", useValue: "https://localhost:7253/api", multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
