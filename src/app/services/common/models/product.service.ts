@@ -7,15 +7,15 @@ import { HttpClientService } from '../http-client.service';
 })
 export class ProductService {
 
-  constructor( private httpClientService: HttpClientService) { }
+  constructor(private httpClientService: HttpClientService) { }
 
-  create(product : Create_Product){ 
+  create(product: Create_Product, successCallBack?: any) {
     this.httpClientService.post({
       controller: "products"
-    },product)
-    .subscribe(result => {
-      alert("Basarili")
-    })
+    }, product)
+      .subscribe(result => {
+        successCallBack()
+      })
 
   }
 }
