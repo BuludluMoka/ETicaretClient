@@ -28,7 +28,7 @@ export class CreateComponent implements OnInit {
       this.spinner.hide();
       this.toastr.message("Mehsul Elave Edildi", "Mehsul Elavesi", {
         messageType: ToastrMessageType.Success,
-        position: ToastrPosition.TopFullWidth 
+        position: ToastrPosition.TopFullWidth
       })
     });
 

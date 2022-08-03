@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class CustomToastrService {
 
 export class ToastrOptions {
   messageType: ToastrMessageType;
-  position: ToastrPosition
+  position: ToastrPosition;
+  
+
 }
 
 export enum ToastrMessageType {

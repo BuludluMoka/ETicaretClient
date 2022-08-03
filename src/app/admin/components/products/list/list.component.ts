@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { verifyHostBindings } from '@angular/compiler';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { List_Product } from 'src/app/contracts/list_product';
+import { CustomToastrService, ToastrMessageType, ToastrOptions, ToastrPosition } from 'src/app/services/common/custom-toastr.service';
+import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +14,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spinner: NgxSpinnerService, private productService: ProductService, private toastr: CustomToastrService) { }
 
-  ngOnInit(): void {
+
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updateDate', 'edit', 'delete'];
+  dataSource: MatTableDataSource<List_Product> = null;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  async getProducts(){
+    this.spinner.show();
+
+    const allProducts: { totalCount: number, products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex: 0, this.paginator? this.paginator.pageSize: 5, () => this.spinner.hide(), () => {
+      this.toastr.message("Bir Xeta bas verdi", "Xeta", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopRight
+      })
+    })
+
+    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
+    this.paginator.length = allProducts.totalCount;
+  }
+  async ngOnInit() {
+  await this.getProducts()
+  }
+   async pageChanged(){
+    await this.getProducts();
   }
 
 }
