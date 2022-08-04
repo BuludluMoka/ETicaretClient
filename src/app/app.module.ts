@@ -9,17 +9,23 @@ import { PublicModule } from './public/public.module';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton: true
+   }),
     AdminModule,
     PublicModule,
     NgxSpinnerModule

@@ -1,11 +1,14 @@
 import { verifyHostBindings } from '@angular/compiler';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { List_Product } from 'src/app/contracts/list_product';
 import { CustomToastrService, ToastrMessageType, ToastrOptions, ToastrPosition } from 'src/app/services/common/custom-toastr.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-list',
@@ -21,11 +24,13 @@ export class ListComponent implements OnInit {
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  async getProducts(){
+ 
+  async getProducts() {
     this.spinner.show();
 
-    const allProducts: { totalCount: number, products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex: 0, this.paginator? this.paginator.pageSize: 5, () => this.spinner.hide(), () => {
-      this.toastr.message("Bir Xeta bas verdi", "Xeta", {
+    const allProducts: { totalCount: number, products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => this.spinner.hide(), () => {
+      this.spinner.hide();
+      this.toastr.message("Bir problem yarandi", "Xeta", {
         messageType: ToastrMessageType.Error,
         position: ToastrPosition.TopRight
       })
@@ -34,11 +39,20 @@ export class ListComponent implements OnInit {
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
     this.paginator.length = allProducts.totalCount;
   }
-  async ngOnInit() {
-  await this.getProducts()
+   delete(id, event){
+    const img: HTMLImageElement = event.srcElement;
+    
+    this.productService.delete(id)
+    $(img.parentElement.parentElement).fadeOut(1000,()=>{ this.getProducts()});
   }
-   async pageChanged(){
+
+ 
+  async pageChanged() {
     await this.getProducts();
   }
+  async ngOnInit() {
+    await this.getProducts()
+  }
+  
 
 }
